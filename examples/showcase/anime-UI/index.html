@@ -6,6 +6,21 @@
     <meta name="description" content="Anime UI — A-Frame">
     <script src="../../../dist/aframe-master.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script>
+      navigator.xr.addEventListener('sessiongranted', e => {
+        const observer = new MutationObserver(o => {
+          const button = document.querySelector('.a-enter-vr-button');
+          if (button) {
+            observer.disconnect();
+            button.click();
+          }
+        });
+        observer.observe(document, {
+          childList: true,
+          subtree: true,
+        });
+      });
+    </script>
   </head>
   <body>
     <a-scene renderer="colorManagement: true;">
